@@ -85,22 +85,41 @@ export default class Day extends Component {
         </TouchableWithoutFeedback>
       )
     : (
-      <TouchableOpacity onPress={this.props.onPress}>
-        <View style={[styles.dayButton, customStyle.dayButton]}>
-          <View style={this.dayCircleStyle(isWeekend, isSelected, isToday, event)}>
-            <Text style={this.dayTextStyle(isWeekend, isSelected, isToday, event)}>{caption}</Text>
+      this.props.disableDay 
+      ? (
+        <TouchableOpacity onPress={this.props.onPress}>
+          <View style={[styles.dayButton, customStyle.dayButton]}>
+            <View style={this.dayCircleStyle(isWeekend, isSelected, isToday, event)}>
+              <Text style={this.dayTextStyle(isWeekend, isSelected, isToday, event)}>{caption}</Text>
+            </View>
+            {showEventIndicators &&
+              <View style={[
+                styles.eventIndicatorFiller,
+                customStyle.eventIndicatorFiller,
+                event && styles.eventIndicator,
+                event && customStyle.eventIndicator,
+                event && event.eventIndicator]}
+              />
+            }
           </View>
-          {showEventIndicators &&
-            <View style={[
-              styles.eventIndicatorFiller,
-              customStyle.eventIndicatorFiller,
-              event && styles.eventIndicator,
-              event && customStyle.eventIndicator,
-              event && event.eventIndicator]}
-            />
-          }
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        )
+      : (
+        <View style={[styles.dayButton, customStyle.dayButton]}>
+            <View style={this.dayCircleStyle(isWeekend, isSelected, isToday, event)}>
+              <Text style={this.dayTextStyle(isWeekend, isSelected, isToday, event)}>{caption}</Text>
+            </View>
+            {showEventIndicators &&
+              <View style={[
+                styles.eventIndicatorFiller,
+                customStyle.eventIndicatorFiller,
+                event && styles.eventIndicator,
+                event && customStyle.eventIndicator,
+                event && event.eventIndicator]}
+              />
+            }
+          </View>
+      )
     );
   }
 }
