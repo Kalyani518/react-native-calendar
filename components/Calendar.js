@@ -49,6 +49,7 @@ export default class Calendar extends Component {
     today: PropTypes.any,
     weekStart: PropTypes.number,
     disableDay: PropTypes.bool,
+    disabledShowControls: PropTypes.bool
   };
 
   static defaultProps = {
@@ -67,7 +68,8 @@ export default class Calendar extends Component {
     titleFormat: 'MMMM YYYY',
     today: moment(),
     weekStart: 1,
-    disableDay: true
+    disableDay: true,
+    disabledShowControls: false
   };
 
   componentDidMount() {
@@ -256,6 +258,7 @@ export default class Calendar extends Component {
           <TouchableOpacity
             style={[styles.controlButton, this.props.customStyle.controlButton]}
             onPress={this.onPrev}
+            disabled={this.props.disabledShowControls}
           >
             <Text style={[styles.controlButtonText, this.props.customStyle.controlButtonText]}>
               {this.props.prevButtonText}
@@ -267,6 +270,7 @@ export default class Calendar extends Component {
           <TouchableOpacity
             style={[styles.controlButton, this.props.customStyle.controlButton]}
             onPress={this.onNext}
+            disabled={this.props.disabledShowControls}
           >
             <Text style={[styles.controlButtonText, this.props.customStyle.controlButtonText]}>
               {this.props.nextButtonText}
